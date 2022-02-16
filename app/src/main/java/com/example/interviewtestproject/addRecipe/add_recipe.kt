@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.interviewtestproject.R
 import com.example.interviewtestproject.addStep.addStep
+import com.example.interviewtestproject.home.MainActivity
 import com.example.interviewtestproject.home.RecipeItemListView
 import com.example.interviewtestproject.home.StepItemListView
 import com.example.interviewtestproject.home.recipeDetails
@@ -220,6 +221,9 @@ class add_recipe : AppCompatActivity() {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     Toast.makeText(this, "Add Successfull", Toast.LENGTH_SHORT).show()
                     Log.d("Add Recipe", "Finally we saved the user to Firebase Database")
+                    val intent = Intent(this, MainActivity::class.java)
+                    finish()
+                    startActivity(intent)
                 }
 
             }
@@ -240,7 +244,7 @@ class add_recipe : AppCompatActivity() {
             val stepfilenameRecipeUID = UUID.randomUUID().toString()
             var stepfileUid = "$stepdateInString $stepfilenameRecipeUID"
 
-            val ref = FirebaseDatabase.getInstance().getReference("recipes/$filenameRecipe/stepData/$stepfileUid")
+            val ref = FirebaseDatabase.getInstance().getReference("recipes/$filenameRecipe/step/$stepfileUid")
 
             ref.setValue(item)
         }
